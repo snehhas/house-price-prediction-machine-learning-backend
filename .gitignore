@@ -1,0 +1,25 @@
+# Virtual environment
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# VSCode settings (if using)
+.vscode/
+
+# macOS and Linux
+.DS_Store
+
+# Model files
+*.pkl
+*.h5
+
+# Static files (optional if using collectstatic)
+staticfiles/
+
+# Environment variables
+.env
+
+# Database (if SQLite and local only)
+db.sqlite3
