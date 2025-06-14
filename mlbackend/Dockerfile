@@ -1,22 +1,34 @@
-# Use official Python image
-FROM python:3.9-slim
+# Base image with Python
+FROM python:3.10-slim
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-# Set working directory
+# Set work directory
 WORKDIR /app
 
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpq-dev \
+    gcc \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
 # Install dependencies
-COPY requirements.txt .
-RUN pip install --upgrade pip && pip install -r requirements.txt
+COPY requirements.txt /app/
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
 
 # Copy project files
-COPY . .
+COPY . /app/
 
-# ✅ Expose the port to Render
+# Collect static files (optional for APIs)
+RUN python manage.py collectstatic --noinput
+
+# Expose the port used by Django
 EXPOSE 8000
 
-# Run the application
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Start server
+CMD ["gunicorn", "mlbackend.wsgi:application", "--bind", "0.0.0.0:8000"]

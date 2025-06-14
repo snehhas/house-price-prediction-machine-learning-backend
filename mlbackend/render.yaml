@@ -1,13 +1,15 @@
 services:
   - type: web
-    name: house-price-api
+    name: house-price-prediction-ml-backend
     env: docker
     plan: free
     autoDeploy: true
     envVars:
+      - key: PORT
+        value: "8000"
       - key: DJANGO_SECRET_KEY
         generateValue: true
       - key: DEBUG
-        value: 'False'
+        value: "False"
       - key: ALLOWED_HOSTS
-        value: 'house-price-prediction-machine-learning.onrender.com'
+        value: "house-price-prediction-machine-learning.onrender.com"
