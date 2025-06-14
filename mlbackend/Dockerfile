@@ -15,5 +15,8 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 # Copy project files
 COPY . .
 
+# ✅ Expose the port to Render
+EXPOSE 8000
+
 # Run the application
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
