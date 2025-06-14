@@ -4,6 +4,8 @@ venv/
 # Python cache
 __pycache__/
 *.py[cod]
+*.pyc
+*.pyo
 
 # VSCode settings (if using)
 .vscode/
